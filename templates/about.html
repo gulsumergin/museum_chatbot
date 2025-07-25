@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+
+  {% include 'navbar.html' %}
+
+  <div class="content">
+    <div class="museum-card">
+      <h1>About Us</h1>
+      <p>We are a digital museum initiative dedicated to bringing art history to life through conversational technology.</p>
+      <p>By integrating AI and curated content, we allow visitors to interact with artworks in a personal and immersive way—simulating real dialogue with the minds behind the masterpieces.</p>
+      <p>This project is part of a usability engineering & design exploration and aims to make art education more accessible, memorable, and inspiring.</p>
+    </div>
+
+  
+
+
+    
+    <!-- Contact Form -->
+    <div class="museum-card">
+      <h2>Contact Us</h2>
+
+      <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash-message {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+  <form action="{{ url_for('contact') }}" method="POST">
+    <label for="name">Your Name:</label>
+    <input type="text" name="name" id="name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="message">Your Message:</label>
+    <textarea name="message" id="message" rows="5" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  </div>
+  <div class="museum-card">
+  <h2>Meet Our Creator</h2>
+  <p><strong>Ümmü Gülsüm Ergin</strong> is a software engineering student and a passionate explorer of usability, design, and human-computer interaction.</p>
+  <p>Currently studying Usability Engineering at Rhein-Waal University of Applied Sciences in Germany, she combines her technical background with creativity to build meaningful digital experiences.</p>
+  <div style="margin-top: 15px;">
+    <a href="https://www.instagram.com/ummugulsumergiin/" target="_blank">Instagram</a> |
+    <a href="https://github.com/gulsumergin" target="_blank">GitHub</a> |
+    <a href="https://www.linkedin.com/in/%C3%BCmm%C3%BC-g%C3%BCls%C3%BCm-ergin-6b584217b/" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+</div>
+
+  {% include 'footer.html' %}
+</body>
+</html>

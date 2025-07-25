@@ -1,0 +1,52 @@
+<!-- select_artist.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Artist</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+  {% include 'navbar.html' %}
+  {% include 'components/breadcrumb.html' %}
+
+  <div class="content">
+    <div class="museum-card">
+      <h1>Welcome, {{ username }}!</h1>
+      <h2>Please select an artist:</h2>
+    </div>
+
+    <div class="card-container">
+      <!-- Jean-Michel Basquiat -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="{{ url_for('static', filename='basquiat.jpeg') }}" alt="basquiat">
+            <h3>Jean Michel Basquiat</h3>
+          </div>
+          <div class="flip-card-back">
+            <p>Jean Michel Basquiat (1960 – 1988) was an American graffiti artist and neo-expressionist painter.</p>
+            <a href="{{ url_for('select_artwork', artist_name='jean_michel_basquiat') }}" class="button">Select</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frida Kahlo -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="{{ url_for('static', filename='frida.jpg') }}" alt="frida">
+            <h3>Frida Kahlo</h3>
+          </div>
+          <div class="flip-card-back">
+            <p>Mexican painter. Expressed identity, pain, and culture with symbolic imagery.</p>
+            <a href="{{ url_for('select_artwork', artist_name='frida_kahlo') }}" class="button">Select</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+</body>
+</html>

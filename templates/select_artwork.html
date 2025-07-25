@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Artwork</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+  {% include 'navbar.html' %}
+  {% include 'components/breadcrumb.html' %}
+  <div class="content">
+    <div class="museum-card">
+      <h1>{{ username }}, you selected {{ artist.replace('_', ' ').title() }}</h1>
+      <h2>Please choose an artwork:</h2>
+    </div>
+
+    <div class="card-container">
+
+      {% if artist == 'jean_michel_basquiat' %}
+        <!-- Untitled (Skull) -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{{ url_for('static', filename='untitled-skull.jpg') }}" alt="untitled-skull">
+              <h3>Untitled (Skull)</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>1981 – X-ray-like vision of a skull-like head. Symbolic and raw.</p>
+              <a href="{{ url_for('chat', artwork='untitled_skull', username=username, artist=artist) }}" class="button">Start Chat</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charles the First -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{{ url_for('static', filename='charles-the-first.jpg') }}" alt="charles-the-first">
+              <h3>Charles the First (1982)</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>1982 – Tribute to jazz legend Charlie Parker. Power, music, and chaos.</p>
+              <a href="{{ url_for('chat', artwork='charles_the_first', username=username, artist=artist) }}" class="button">Start Chat</a>
+            </div>
+          </div>
+        </div>
+
+      {% elif artist == 'frida_kahlo' %}
+        <!-- The Two Fridas -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{{ url_for('static', filename='two-fridas.jpg') }}" alt="two-fridas">
+              <h3>The Two Fridas</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>1939 – Dual identity, heartbreak, and emotional symbolism.</p>
+              <a href="{{ url_for('chat', artwork='the_two_fridas', username=username, artist=artist) }}" class="button">Start Chat</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Henry Ford Hospital -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{{ url_for('static', filename='henry-ford-hospital.jpeg') }}" alt="henry-ford-hospital">
+              <h3>Henry Ford Hospital (1932)</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>1932 – A surreal expression of pain, identity, and strength.</p>
+              <a href="{{ url_for('chat', artwork='henry_ford_hospital', username=username, artist=artist) }}" class="button">Start Chat</a>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+  {% include 'footer.html' %}
+</body>
+</html>

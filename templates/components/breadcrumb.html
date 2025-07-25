@@ -1,0 +1,24 @@
+<!-- templates/components/breadcrumb.html -->
+<!-- Bu dosya breadcrumbs listesini gösterir -->
+
+<nav aria-label="breadcrumb" style="margin: 1rem 0;">
+  <ol class="breadcrumb">
+    
+    <!-- breadcrumbs listesini döngü ile yazdırıyoruz -->
+    {% for crumb in breadcrumbs %}
+      
+      {% if not loop.last %}
+        <!-- Sonuncu değilse: link olarak göster -->
+        <li class="breadcrumb-item">
+          <a href="{{ crumb.url }}">{{ crumb.name }}</a>
+        </li>
+      {% else %}
+        <!-- Sonuncu ise: aktif sayfa, link yok -->
+        <li class="breadcrumb-item active" aria-current="page">
+          {{ crumb.name }}
+        </li>
+      {% endif %}
+
+    {% endfor %}
+  </ol>
+</nav>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat with the Artwork</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  {% include 'navbar.html' %}
+  {% include 'components/breadcrumb.html' %}
+  <div class="content">
+
+    <h1>{{ username }}, you're now chatting about: {{ artwork.replace('_', ' ').title() }}</h1>
+
+    <!-- Chat box -->
+    <div id="chat-box" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-bottom: 1rem;">
+      <p><strong>Artwork Bot:</strong> Hello! Ask me anything about "{{ artwork.replace('_', ' ').title() }}"</p>
+    </div>
+
+    <!-- Input form -->
+    <form id="chat-form" onsubmit="event.preventDefault(); sendMessage();">
+      <input type="text" id="message" placeholder="Type your message..." required>
+      <button type="submit">Send</button>
+    </form>
+
+    <!-- JavaScript for streaming -->
+    <script>
+      async function sendMessage() {
+        const messageInput = document.getElementById("message");
+        const userMessage = messageInput.value.trim();
+        if (!userMessage) return;
+
+        // Add user message to chat box
+        const chatBox = document.getElementById("chat-box");
+        const userDiv = document.createElement("div");
+        userDiv.className = "user-message";
+        userDiv.textContent = "👤 " + userMessage;
+        chatBox.appendChild(userDiv);
+
+        // Create bot response placeholder
+        const botDiv = document.createElement("div");
+        botDiv.className = "bot-message";
+        botDiv.textContent = "🎨 ";
+        chatBox.appendChild(botDiv);
+
+        // Clear input field
+        messageInput.value = "";
+
+        try {
+          const response = await fetch("/chat", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message: userMessage })
+          });
+
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let result = "";
+
+          // Read the streamed chunks
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            const chunk = decoder.decode(value);
+            result += chunk;
+            botDiv.textContent += chunk;
+            chatBox.scrollTop = chatBox.scrollHeight;
+          }
+        } catch (error) {
+          botDiv.textContent = "❌ Yanıt alınamadı.";
+          console.error(error);
+        }
+      }
+    </script>
+
+  </div>
+  {% include 'footer.html' %}
+</body>
+</html>
+
+

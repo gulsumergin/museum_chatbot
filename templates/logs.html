@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Logs</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+  {% include 'navbar.html' %}
+
+  <div class="content">
+    <div class="museum-card">
+      <h1>Conversation Logs</h1>
+      <p><a href="{{ url_for('download_logs') }}" class="button">Download as PDF</a></p>
+
+      <!-- Filtre Kutuları -->
+      <div class="filter-box">
+        <input type="text" id="usernameFilter" placeholder="Filter by Username">
+        <input type="text" id="ageFilter" placeholder="Filter by Age">
+        <input type="text" id="artworkFilter" placeholder="Filter by Artwork">
+        <input type="text" id="senderFilter" placeholder="Filter by Sender (user/bot)">
+        <input type="date" id="dateFilter" placeholder="Filter by Date">
+        <button id="applyFilters">Search</button>
+        <button id="clearFilters">Clear</button>
+      </div>
+
+      <!-- Log Tablosu -->
+      <table id="logTable">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Age</th>
+            <th>Artwork</th>
+            <th>Sender</th>
+            <th>Message</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in messages %}
+            <tr>
+              <td>{{ message.username }}</td>
+              <td>{{ message.age }}</td>
+              <td>{{ message.artwork }}</td>
+              <td>{{ message.sender }}</td>
+              <td>{{ message.text }}</td>
+              <td>{{ message.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Filtreleme Scripti -->
+  <script>
+    const filters = {
+      username: document.getElementById("usernameFilter"),
+      age: document.getElementById("ageFilter"),
+      artwork: document.getElementById("artworkFilter"),
+      sender: document.getElementById("senderFilter"),
+      date: document.getElementById("dateFilter")
+    };
+
+    const table = document.getElementById("logTable");
+    const rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+    function filterTable() {
+      const usernameVal = filters.username.value.toLowerCase();
+      const ageVal = filters.age.value.trim();
+      const artworkVal = filters.artwork.value.toLowerCase();
+      const senderVal = filters.sender.value.toLowerCase();
+      const dateVal = filters.date.value;
+
+      for (let row of rows) {
+        const username = row.cells[0].textContent.toLowerCase();
+        const age = row.cells[1].textContent.trim();
+        const artwork = row.cells[2].textContent.toLowerCase();
+        const sender = row.cells[3].textContent.toLowerCase();
+        const timestamp = row.cells[5].textContent;
+
+        const matchesUsername = username.includes(usernameVal);
+        const matchesAge = !ageVal || age === ageVal;
+        const matchesArtwork = artwork.includes(artworkVal);
+        const matchesSender = sender.includes(senderVal);
+        const matchesDate = !dateVal || timestamp.startsWith(dateVal);
+
+        row.style.display = (matchesUsername && matchesAge && matchesArtwork && matchesSender && matchesDate) ? "" : "none";
+      }
+    }
+
+    document.getElementById("applyFilters").addEventListener("click", filterTable);
+    document.getElementById("clearFilters").addEventListener("click", () => {
+      for (let key in filters) filters[key].value = "";
+      filterTable();
+    });
+  </script>
+
+  {% include 'footer.html' %}
+</body>
+</html>

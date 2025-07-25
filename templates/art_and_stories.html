@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Art & Stories</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  {% include 'navbar.html' %}
+  <div class="content">
+    <div class="museum-card">
+      <h1>Art & Stories</h1>
+      <p>Step into a world where stories are told through brushstrokes and colors. Here you'll explore the inspirations, struggles, and legacies of iconic artists like <strong>Frida Kahlo</strong> and <strong>Jean-Michel Basquiat</strong>.</p>
+      <p>Each work of art in our museum comes with a story. We invite you to chat with the artworks themselves, discover their secrets, and experience history through their eyes.</p>
+    </div>
+
+    <div class="card-container">
+      <!-- Jean Michel Basquiat – Untitled (Skull) -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="{{ url_for('static', filename='untitled-skull.jpg') }}" alt="untitled-skull">
+            <h3>Untitled (Skull)</h3>
+          </div>
+          <div class="flip-card-back">
+            <h4>Jean Michel Basquiat</h4>
+            <p>update</p>
+            <p>update</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jean-Michel Basquiat – Charles the First -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="{{ url_for('static', filename='charles-the-first.jpg') }}" alt="charles-the-first">
+            <h3>Charles the First (1982)</h3>
+          </div>
+          <div class="flip-card-back">
+            <h4>Jean Michel Basquiat</h4>
+            <p>update</p>
+            <p>update</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frida Kahlo – The Two Fridas -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="{{ url_for('static', filename='two-fridas.jpg') }}" alt="two-fridas">
+            <h3>The Two Fridas</h3>
+          </div>
+          <div class="flip-card-back">
+            <h4>Frida Kahlo</h4>
+            <p>1939, Surrealism</p>
+            <p>Duality, heartbreak, and identity in one canvas.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frida Kahlo – Henry Ford Hospital -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="{{ url_for('static', filename='henry-ford-hospital.jpeg') }}" alt="henry-ford-hospital">
+            <h3>Henry Ford Hospital (1932)</h3>
+          </div>
+          <div class="flip-card-back">
+            <h4>Frida Kahlo</h4>
+            <p>update</p>
+            <p>update</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+</body>
+</html>

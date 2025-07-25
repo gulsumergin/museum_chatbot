@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="{{ url_for('index') }}" class="logo">
+      <img src="{{ url_for('static', filename='museum-logo.png') }}" alt="Museum Logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('art_and_stories') }}">Art & Stories</a></li>
+      <li><a href="{{ url_for('about') }}">About Us</a></li>
+      <li><a href="{{ url_for('logs') }}">Logs</a></li>
+
+      
+
+      
+    </ul>
+  </div>
+</nav>
