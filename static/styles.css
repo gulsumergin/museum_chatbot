@@ -218,12 +218,6 @@ button:hover {
   z-index: 2;
 }
 
-
-.card-container:hover .flip-card {
-  filter: blur(2px);
-}
-
-
 .card-container .flip-card:hover {
   filter: none;
 }
